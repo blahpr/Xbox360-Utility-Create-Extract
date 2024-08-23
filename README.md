@@ -5,7 +5,8 @@
 
 * Can be Dropped in to a New folder and Run From There.  ""SEE PICTURES""
 ### Can Be Run From Anywhere \ Make Your Own Folder Place 360 XISO Batch Create Extract v1.0.exe and Both Folders There or Place 360 XISO Batch Create Extract v1.0.exe and Both Folders Anywhere Run From There. 
-* Must Have The x_tool, x_ISO, and 360 XISO Batch Create Extract v1.0.exe Together. ""SEE PICTURES"" 
+* Must Have The x_tool, x_ISO, and 360 XISO Batch Create Extract v1.0.exe Together. ""SEE PICTURES""
+* if x_ISO Folder is not Already Made Create It. 
 **********************************************************************
 ## 1. Batch Extraction of xISO's:
 
