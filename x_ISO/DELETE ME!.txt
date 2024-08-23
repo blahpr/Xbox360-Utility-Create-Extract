@@ -1,0 +1,6 @@
+360 XISO Batch Create Extract v1.0 DELETE ME!
+
+Only added this because GitHub does not allow uploading empty folders or tracking empty folders they call it. so this can be safely deleted. Thank you. 
+
+BLAHPR 2024
+https://github.com/BLAHPR/360.XISO.Batch.Create.Extract.v1.0.2024
