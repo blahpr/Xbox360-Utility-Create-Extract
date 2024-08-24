@@ -1,4 +1,4 @@
-# 360 XISO Batch Create Extract v1.0
+# 360 XISO Batch Create Extract
 * Batch Extraction and Creation of Xbox 360 and Original Xbox ISO's and FOLDER's With Xex or Xbe, XEX or XBE in It.
 * This Tool Allows You to Efficiently Manage Multiple ISO's and FOLDERS With xex or xbe in Them at Once, With All Extracted and Created Files Organized Next to the x_ISO Folder. ""SEE PICTURES""
 ![Capture](https://github.com/user-attachments/assets/b03a169c-b525-475b-bcbe-fe7456b9e314)
