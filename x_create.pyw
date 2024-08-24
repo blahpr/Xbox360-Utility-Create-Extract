@@ -32,7 +32,7 @@ def process_files_in_directory(directory):
         time.sleep(0.2)  # Simulate some processing delay
 
 def create_xiso_from_directories():
-    print("Batch XISO Creation v1.0\n")
+    print("Batch XISO Creation v1.1\n")
     print("BY: BLAHPR 2024\n")
     print("CREATING xISO FILES FROM DIRECTORIES...\n")
 
@@ -40,7 +40,7 @@ def create_xiso_from_directories():
     total_dirs = len(all_dirs)
 
     if total_dirs == 0:
-        print("NO FOLDER DIRECTORIES WITH  .xex or .xbe FILES FOUND.")
+        print("NO FOLDER DIRECTORIES WITH .xex or .xbe FILES FOUND.")
         return
 
     print(f"FOUND {total_dirs} FOLDER DIRECTORIES TO PROCESS.\n")
@@ -58,7 +58,12 @@ def create_xiso_from_directories():
         process_files_in_directory(dir_name)
 
         # Run the command to create the ISO
-        result = subprocess.run(["x_tool/extract-xiso.exe", "-c", dir_name, iso_filename], capture_output=True, text=True)
+        result = subprocess.run(
+            ["x_tool/extract-xiso.exe", "-c", dir_name, iso_filename],
+            capture_output=True,
+            text=True,
+            creationflags=subprocess.CREATE_NO_WINDOW  # Hide the console window
+        )
         
         if result.returncode != 0:
             print(f"\nError CREATING xISO for \n{dir_name}\n")

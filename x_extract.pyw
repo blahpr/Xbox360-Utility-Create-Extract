@@ -2,7 +2,7 @@ import os
 import subprocess
 
 def extract_xiso_from_files(delete_after=False):
-    print("Batch XISO Extract v1.0\n")
+    print("Batch XISO Extract v1.1\n")
     print("BY: BLAHPR 2024\n")
 
     # Specify the ISO folder
@@ -18,7 +18,11 @@ def extract_xiso_from_files(delete_after=False):
 
         # Run the extraction command
         iso_path = os.path.join(iso_folder, iso_file)
-        result = subprocess.run(["x_tool/extract-xiso.exe", "-x", iso_path], capture_output=True)
+        result = subprocess.run(
+            ["x_tool/extract-xiso.exe", "-x", iso_path],
+            capture_output=True,
+            creationflags=subprocess.CREATE_NO_WINDOW  # Hide the console window
+        )
         
         if result.returncode != 0:
             print(f"SKIPPING: \n>FOLDER EXISTS<> {iso_file}: >FOLDER EXISTS<")
