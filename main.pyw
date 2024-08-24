@@ -5,6 +5,9 @@ import x_create
 import x_extract
 import sys
 import os
+import subprocess
+import pyautogui
+import time
 
 # Function to find resource paths when bundled with PyInstaller
 def resource_path(relative_path):
@@ -20,7 +23,7 @@ def resource_path(relative_path):
 class XISOToolApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("360 XISO Batch Create Extract v1.0")
+        self.root.title("360 XISO Batch Create Extract v1.1")
         self.root.geometry("600x650")
         self.root.configure(bg="brown")
 
@@ -37,11 +40,11 @@ class XISOToolApp:
 
     def create_widgets(self):
         # Title and author labels at the top
-        title_label = tk.Label(self.root, text="\n360 XISO Batch Create Extract v1.0\n", font=("Helvetica", 16), fg="gold", bg="brown")
+        title_label = tk.Label(self.root, text="360 XISO Batch Create Extract v1.1", font=("Helvetica", 16), fg="gold", bg="brown")
         title_label.pack(pady=10)
 
-        author_label = tk.Label(self.root, text="\nBY: BLAHPR 2024\n", font=("Helvetica", 12), fg="gold", bg="brown")
-        author_label.pack(pady=5)
+        author_label = tk.Label(self.root, text="BY: BLAHPR 2024", font=("Helvetica", 12), fg="gold", bg="brown")
+        author_label.pack(pady=1)
 
         # Buttons arranged in the middle
         button_frame = tk.Frame(self.root, bg="black")
@@ -59,6 +62,10 @@ class XISOToolApp:
         extract_delete_btn = tk.Button(button_frame, text="EXTRACT AND PERMANENTLY DELETE xISO FILE'S", command=self.extract_delete_xiso, bg="#FF0000", fg="yellow", font=bold_font)
         extract_delete_btn.pack(pady=5, fill=tk.X, padx=20)
 
+        # New button to run the external program
+        fix_iso_btn = tk.Button(button_frame, text="FIX ISO's ONE at A Time", command=self.run_external_program, bg="#00569D", fg="darkorange", font=bold_font)
+        fix_iso_btn.pack(pady=5, fill=tk.X, padx=20)
+
         help_btn = tk.Button(button_frame, text=">>HELP \\ READ ME<<", command=self.show_help, bg="crimson", fg="white", font=bold_font)
         help_btn.pack(pady=5, fill=tk.X, padx=20)
 
@@ -73,7 +80,12 @@ class XISOToolApp:
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.status_text.config(yscrollcommand=scrollbar.set)
 
+    def clear_status(self):
+        """ Clear the status text window. """
+        self.status_text.delete('1.0', tk.END)
+
     def create_xiso(self):
+        self.clear_status()
         self.update_status("\nStarting xISO creation...\n")
         threading.Thread(target=self.run_create_xiso).start()
 
@@ -82,10 +94,12 @@ class XISOToolApp:
         self.update_status("\nxISO creation complete.\n")
 
     def extract_xiso(self):
+        self.clear_status()
         self.update_status("\nStarting xISO extraction...\n")
         threading.Thread(target=self.run_extract_xiso, args=(False,)).start()
 
     def extract_delete_xiso(self):
+        self.clear_status()
         self.update_status("\nStarting xISO extraction and deletion...\n")
         threading.Thread(target=self.run_extract_xiso, args=(True,)).start()
 
@@ -106,7 +120,7 @@ class XISOToolApp:
 
     def show_help(self):
         help_window = tk.Toplevel(self.root)
-        help_window.title(">ReadMe 360 XISO Batch Create Extract v1.0<")
+        help_window.title(">ReadMe 360 XISO Batch Create Extract v1.1<")
         help_window.geometry("800x800")
         help_window.configure(bg="brown")
 
@@ -125,7 +139,7 @@ class XISOToolApp:
         text_widget.config(xscrollcommand=scrollbar_x.set)
 
         help_text = (
-            "* 360 XISO Batch Create Extract v1.0\n\n"
+            "* 360 XISO Batch Create Extract v1.1\n\n"
             "* Batch Extraction and Creation of Xbox 360 and Original Xbox ISOs\n\n"
             "* This setup allows you to efficiently manage multiple ISOs at once, with\n"
             "* all extracted and created files organized next to the x_ISO folder.\n\n"
@@ -155,6 +169,26 @@ class XISOToolApp:
 
         close_btn = tk.Button(help_window, text="CLOSE", command=help_window.destroy, bg="darkgreen", fg="tan")
         close_btn.pack(pady=10)
+
+    def run_external_program(self):
+        self.clear_status()
+        self.update_status("\nRUNNING 360mpGui v1.5.0.0.exe\n\n")
+        threading.Thread(target=self.execute_external_program).start()
+
+    def execute_external_program(self):
+        # Start the external program without a console window
+        subprocess.Popen([r'x_tool\360 mp Gui v1.5.0.0\360mpGui v1.5.0.0.exe'], creationflags=subprocess.CREATE_NO_WINDOW)
+        
+        # Wait for the program to load
+        time.sleep(4.5)
+        
+        # Simulate mouse clicks and keystrokes
+        pyautogui.click(x=1060, y=608)  # Click OK on Error Message About no Drive Detected
+        pyautogui.press('enter')        # Press Enter Key
+        pyautogui.click(x=843, y=361)   # Click Create ISO Tab
+        pyautogui.click(x=982, y=702)   # Click Convert an created ISO Button
+
+        self.update_status("\n\nBrowse \\ Locate ISO's to Fix One at a Time.\n")
 
 def main():
     root = tk.Tk()
