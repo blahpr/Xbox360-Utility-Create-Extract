@@ -32,7 +32,7 @@
 
 **********************************************************************
 * BLAHPR 2024.
-* Contact Email: geebob273@gmail.com
+* Contact Email: geebob273@gmail.com - https://github.com/BLAHPR/360.XISO.Batch.Create.Extract.v1.0.2024
 
 # THANK YOU's
 * <in@fishtank.com> - for your cool work on extract-xiso.exe and source code.
