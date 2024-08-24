@@ -1,0 +1,18 @@
+## What's Changed
+* UPDATED: To v1.1.
+* ADDED: 360mpGui v1.5.0.0 to fix ISO's to Work with Xbox Image Browser.
+* ADDED: Fix Button to Automate Launch 360mpGui v1.5.0.0. "ONLY Works as Intended When 360mpGui v1.5.0.0.exe is Run from this Utility and when 360mpGui v1.5.0.0.exe is in its Default Open Position on Screen. 
+* Cleaned up Output Window.
+* FIXED: GUI Window Text Orientation.
+* REMOVED: Console Windows for Both Create and Extract Functions.
+* TODO: Update ReadMe for v1.1.
+### DONE: Saturday, August 24, 2024 4:55 AM. 
+
+### Contributors - Credits - Thank You's
+ Credits to the Original Copyright Owners
+* @BLAHPR 
+* <in@fishtank.com>
+* Redline99
+* 360mpGui Team
+
+**Full Changelog**: https://github.com/BLAHPR/Xbox360-ISO-Create-Extract/compare/v1.0...v1.1
