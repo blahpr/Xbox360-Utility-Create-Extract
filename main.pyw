@@ -8,6 +8,7 @@ import os
 import subprocess
 import pyautogui
 import time
+import shutil  # Import shutil for folder deletion
 
 # Function to find resource paths when bundled with PyInstaller
 def resource_path(relative_path):
@@ -23,8 +24,8 @@ def resource_path(relative_path):
 class XISOToolApp:
     def __init__(self, root):
         self.root = root
-        self.root.title("360 XISO Batch Create Extract v1.1")
-        self.root.geometry("600x650")
+        self.root.title("360 XISO Batch Create Extract v1.2")
+        self.root.geometry("600x700")
         self.root.configure(bg="brown")
 
         # Set the icon for the Tkinter window using resource_path
@@ -40,7 +41,7 @@ class XISOToolApp:
 
     def create_widgets(self):
         # Title and author labels at the top
-        title_label = tk.Label(self.root, text="360 XISO Batch Create Extract v1.1", font=("Helvetica", 16), fg="gold", bg="brown")
+        title_label = tk.Label(self.root, text="360 XISO Batch Create Extract v1.2", font=("Helvetica", 16), fg="gold", bg="brown")
         title_label.pack(pady=10)
 
         author_label = tk.Label(self.root, text="BY: BLAHPR 2024", font=("Helvetica", 12), fg="gold", bg="brown")
@@ -53,18 +54,34 @@ class XISOToolApp:
         # Define a font variable for bold text
         bold_font = ("Helvetica", 12, "bold")
 
-        create_btn = tk.Button(button_frame, text="CREATE xISO's FROM FOLDER DIRECTORIE'S", command=self.create_xiso, bg="lightgreen", fg="green", font=bold_font)
-        create_btn.pack(pady=5, fill=tk.X, padx=20)
-
-        extract_btn = tk.Button(button_frame, text="EXTRACT xISO's TO FOLDER DIRECTORIE'S", command=self.extract_xiso, bg="lightblue", fg="blue", font=bold_font)
+        extract_btn = tk.Button(button_frame, text="Extract Game Folders from ISOS", command=self.extract_xiso, bg="lightblue", fg="blue", font=bold_font)
         extract_btn.pack(pady=5, fill=tk.X, padx=20)
 
-        extract_delete_btn = tk.Button(button_frame, text="EXTRACT AND PERMANENTLY DELETE xISO FILE'S", command=self.extract_delete_xiso, bg="#FF0000", fg="yellow", font=bold_font)
+        create_btn = tk.Button(button_frame, text="Create ISOS from Game Folders", command=self.create_xiso, bg="lightgreen", fg="green", font=bold_font)
+        create_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        extract_delete_btn = tk.Button(button_frame, text="Extract and Delete ISO Files  !!! >PERMANENTLY< !!!", command=self.extract_delete_xiso, bg="#FF0000", fg="yellow", font=bold_font)
         extract_delete_btn.pack(pady=5, fill=tk.X, padx=20)
 
+        # New button to delete source folders
+        delete_source_folders_btn = tk.Button(button_frame, text="Delete Game Folders  !!! >PERMANENTLY< !!!", command=self.delete_source_folders, bg="#FF0000", fg="yellow", font=bold_font)
+        delete_source_folders_btn.pack(pady=5, fill=tk.X, padx=20)
+
         # New button to run the external program
-        fix_iso_btn = tk.Button(button_frame, text="FIX ISO's ONE at A Time", command=self.run_external_program, bg="#00569D", fg="darkorange", font=bold_font)
+        fix_iso_btn = tk.Button(button_frame, text="Fix ISOS One by One", command=self.run_external_program_1, bg="#00569D", fg="darkorange", font=bold_font)
         fix_iso_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        # New button to run the external program
+        isotogod_btn = tk.Button(button_frame, text="ISO to GOD 'GAMES ON DEMAND", command=self.run_external_program_2, bg="#00569D", fg="darkorange", font=bold_font)
+        isotogod_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        # New button to run the external program
+        isotogod_btn = tk.Button(button_frame, text="GOD to ISO 'GAMES ON DEMAND to ISO", command=self.run_external_program_3, bg="#00569D", fg="darkorange", font=bold_font)
+        isotogod_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        # New button to run the external program
+        isotogod_btn = tk.Button(button_frame, text="Xbox Image Browser v2.9 by Redline99", command=self.run_external_program_4, bg="#00569D", fg="darkorange", font=bold_font)
+        isotogod_btn.pack(pady=5, fill=tk.X, padx=20)
 
         help_btn = tk.Button(button_frame, text=">>HELP \\ READ ME<<", command=self.show_help, bg="crimson", fg="white", font=bold_font)
         help_btn.pack(pady=5, fill=tk.X, padx=20)
@@ -86,26 +103,21 @@ class XISOToolApp:
 
     def create_xiso(self):
         self.clear_status()
-        self.update_status("\nStarting xISO creation...\n")
         threading.Thread(target=self.run_create_xiso).start()
 
     def run_create_xiso(self):
         x_create.create_xiso_from_directories()
-        self.update_status("\nxISO creation complete.\n")
 
     def extract_xiso(self):
         self.clear_status()
-        self.update_status("\nStarting xISO extraction...\n")
         threading.Thread(target=self.run_extract_xiso, args=(False,)).start()
 
     def extract_delete_xiso(self):
         self.clear_status()
-        self.update_status("\nStarting xISO extraction and deletion...\n")
         threading.Thread(target=self.run_extract_xiso, args=(True,)).start()
 
     def run_extract_xiso(self, delete_after):
         x_extract.extract_xiso_from_files(delete_after)
-        self.update_status("\nxISO extraction and deletion complete.\n")
 
     def update_status(self, message):
         self.status_text.insert(tk.END, message)
@@ -120,7 +132,7 @@ class XISOToolApp:
 
     def show_help(self):
         help_window = tk.Toplevel(self.root)
-        help_window.title(">ReadMe 360 XISO Batch Create Extract v1.1<")
+        help_window.title(">ReadMe 360 XISO Batch Create Extract<")
         help_window.geometry("800x800")
         help_window.configure(bg="brown")
 
@@ -139,7 +151,7 @@ class XISOToolApp:
         text_widget.config(xscrollcommand=scrollbar_x.set)
 
         help_text = (
-            "* 360 XISO Batch Create Extract v1.1\n\n"
+            "* 360 XISO Batch Create Extract\n\n"
             "* Batch Extraction and Creation of Xbox 360 and Original Xbox ISOs\n\n"
             "* This setup allows you to efficiently manage multiple ISOs at once, with\n"
             "* all extracted and created files organized next to the x_ISO folder.\n\n"
@@ -170,12 +182,12 @@ class XISOToolApp:
         close_btn = tk.Button(help_window, text="CLOSE", command=help_window.destroy, bg="darkgreen", fg="tan")
         close_btn.pack(pady=10)
 
-    def run_external_program(self):
+    def run_external_program_1(self):
         self.clear_status()
         self.update_status("\nRUNNING 360mpGui v1.5.0.0.exe\n\n")
-        threading.Thread(target=self.execute_external_program).start()
+        threading.Thread(target=self.execute_external_program_1).start()
 
-    def execute_external_program(self):
+    def execute_external_program_1(self):
         # Start the external program without a console window
         subprocess.Popen([r'x_tool\360 mp Gui v1.5.0.0\360mpGui v1.5.0.0.exe'], creationflags=subprocess.CREATE_NO_WINDOW)
         
@@ -189,6 +201,79 @@ class XISOToolApp:
         pyautogui.click(x=982, y=702)   # Click Convert an created ISO Button
 
         self.update_status("\n\nBrowse \\ Locate ISO's to Fix One at a Time.\n")
+
+    def run_external_program_2(self):
+        self.clear_status()
+        self.update_status("BY: BLAHPR 2024")
+        self.update_status("\nRUNNING: Iso2God.exe\n\n")
+        threading.Thread(target=self.execute_external_program_2).start()
+
+    def execute_external_program_2(self):
+        # Start the external program without a console window
+        subprocess.Popen([r'x_tool\iso2god-v1.3.8\Iso2God.exe'], creationflags=subprocess.CREATE_NO_WINDOW)
+
+        # Update status message with the correct information
+        self.update_status("\nCreate GOD from ISOS for Xbox360. Also Works with Original Xbox ISOS and Makes These Original Xbox Games\\ISOS GOD Format for Xbox360.")
+
+    def run_external_program_3(self):
+        self.clear_status()
+        self.update_status("BY: BLAHPR 2024")
+        self.update_status("\nRUNNING: God2Iso.exe\n\n")
+        threading.Thread(target=self.execute_external_program_3).start()
+
+    def execute_external_program_3(self):
+        # Start the external program without a console window
+        subprocess.Popen([r'x_tool\God2Iso 1.0.5\God2Iso.exe'], creationflags=subprocess.CREATE_NO_WINDOW)
+
+        # Update status message with the correct information
+        self.update_status("\nCreate ISOS from GOD 'Games on Demand' for Xbox360.\nUse Fix ISOS One by One To Fix ISOS to Work with Xbox Image Browser.\n\nDONT FORGET:\nAfter or Before Adding ISOS Check Fix''CreateIsoGood''broken header if Needed.")
+
+    def run_external_program_4(self):
+        self.clear_status()
+        self.update_status("BY: BLAHPR 2024")
+        self.update_status("\nRUNNING: Xbox Image Browser.exe\n\n")
+        threading.Thread(target=self.execute_external_program_4).start()
+
+    def execute_external_program_4(self):
+        # Start the external program without a console window
+        subprocess.Popen([r'x_tool\360 mp Gui v1.5.0.0\360mpTools\Xbox Image Browser.exe'], creationflags=subprocess.CREATE_NO_WINDOW)
+
+        # Update status message with the correct information
+        self.update_status("\nGetting Error Running Xbox Image Browser.\n\nOpen As Admin >Run As Admin MSCOMCTL.OCX.bat< From.\nx_tool\\360 mp Gui v1.5.0.0\\360mpTools\\RunAsAdmin MSCOMCTL.OCX.bat\n\nThis Will Register MSCOMCTL.OCX for Windows\n\nPress OK and Try to Open\\Run Again.")
+
+    def delete_source_folders(self):
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        
+        # Exclude specific folders
+        excluded_folders = ["x_tool", "x_ISO"]
+        
+        # Flag to check if any folder was deleted
+        deleted_any_folders = False
+        
+        for folder_name in os.listdir(base_dir):
+            folder_path = os.path.join(base_dir, folder_name)
+            
+            # Check if it's a directory and not in the excluded list
+            if os.path.isdir(folder_path) and folder_name not in excluded_folders:
+                # Check if the folder contains .xex or .xbe files
+                contains_target_files = any(
+                    filename.endswith(('.xex', '.xbe')) for filename in os.listdir(folder_path)
+                )
+                
+                if contains_target_files:
+                    try:
+                        shutil.rmtree(folder_path)  # Remove the folder and all its contents
+                        self.update_status(f"\nDELETING:\n {folder_name}\n")
+                        deleted_any_folders = True
+                    except Exception as e:
+                        self.update_status(f"\nFailed to delete folder {folder_name}: {e}\n")
+        
+        # Check if no folders were deleted
+        if not deleted_any_folders:
+            self.update_status("\nNO GAME FOLDERS TO DELETE\n")
+
+        # Indicate that the deletion process is complete
+        self.update_status("\nDONE\n")
 
 def main():
     root = tk.Tk()

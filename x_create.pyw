@@ -32,10 +32,6 @@ def process_files_in_directory(directory):
         time.sleep(0.2)  # Simulate some processing delay
 
 def create_xiso_from_directories():
-    print("Batch XISO Creation v1.1\n")
-    print("BY: BLAHPR 2024\n")
-    print("CREATING xISO FILES FROM DIRECTORIES...\n")
-
     all_dirs = [d for d in os.listdir('.') if os.path.isdir(d) and contains_xex_or_xbe(d)]
     total_dirs = len(all_dirs)
 
@@ -49,10 +45,10 @@ def create_xiso_from_directories():
         iso_filename = f"{dir_name}.iso"
         
         if os.path.isfile(iso_filename):
-            print(f"SKIPPING: \n>FILE EXISTS<> {iso_filename}: >FILE EXISTS<")
+            print(f"SKIPPING: \n>FILE EXISTS> {iso_filename}")
             continue
 
-        print(f"CREATING xISO FROM FOLDER DIRECTORY: \n{dir_name}")
+        print(f"CREATING: \n{dir_name}")
 
         # Show progress for files in the current directory
         process_files_in_directory(dir_name)
@@ -72,8 +68,7 @@ def create_xiso_from_directories():
         else:
             print(f"SUCCESS: \n{iso_filename}\n")
 
-    print("\nALL DONE COMPLETE.\n")
-    input("Press Enter to continue...")
+    print("\nDONE.\n")
 
 if __name__ == "__main__":
     create_xiso_from_directories()

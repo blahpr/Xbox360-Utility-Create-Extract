@@ -2,13 +2,10 @@ import os
 import subprocess
 
 def extract_xiso_from_files(delete_after=False):
-    print("Batch XISO Extract v1.1\n")
-    print("BY: BLAHPR 2024\n")
-
     # Specify the ISO folder
     iso_folder = "x_ISO"
     
-    print(f"READING xISO FILES: {iso_folder}' DIRECTORY...")
+    print(f"READING FOLDER: '{iso_folder}'...")
 
     # List all .iso files in the ISO folder
     iso_files = [f for f in os.listdir(iso_folder) if f.endswith('.iso')]
@@ -24,19 +21,19 @@ def extract_xiso_from_files(delete_after=False):
             creationflags=subprocess.CREATE_NO_WINDOW  # Hide the console window
         )
         
+        iso_name = os.path.splitext(iso_file)[0]  # Remove the .iso extension
+
         if result.returncode != 0:
-            print(f"SKIPPING: \n>FOLDER EXISTS<> {iso_file}: >FOLDER EXISTS<")
+            print(f"SKIPPING: \n>FOLDER EXISTS> {iso_name}")
         else:
-            print(f"SUCCESS: \n{iso_file}")
+            print(f"SUCCESS: \n{iso_name}")
 
             # Delete the ISO file if the option is selected
             if delete_after:
                 print(f"\nDELETING: \n{iso_file}")
                 os.remove(iso_path)
 
-    print("\nALL DONE COMPLETE.\n")
-    input("Press Enter to continue...")
+    print("\nDONE.\n")
 
-if __name__ == "__main__":
-    # Set delete_after flag to False by default
-    extract_xiso_from_files(delete_after=False)
+# Example usage:
+# extract_xiso_from_files(delete_after=True)
