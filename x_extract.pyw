@@ -24,7 +24,7 @@ def extract_xiso_from_files(delete_after=False):
         iso_name = os.path.splitext(iso_file)[0]  # Remove the .iso extension
 
         if result.returncode != 0:
-            print(f"SKIPPING: \n>FOLDER EXISTS> {iso_name}")
+            print(f"SKIPPING: \nFOLDER EXISTS> {iso_name}")
         else:
             print(f"SUCCESS: \n{iso_name}")
 
@@ -34,6 +34,3 @@ def extract_xiso_from_files(delete_after=False):
                 os.remove(iso_path)
 
     print("\nDONE.\n")
-
-# Example usage:
-# extract_xiso_from_files(delete_after=True)

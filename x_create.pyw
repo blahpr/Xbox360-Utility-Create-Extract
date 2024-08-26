@@ -25,7 +25,7 @@ def process_files_in_directory(directory):
         percent_complete = int(progress * 100)
         progress_bar = '#' * int(progress * 40) + '-' * (40 - int(progress * 40))
         
-        sys.stdout.write(f"\rPROCESSING FILE: {file_name} \n[{progress_bar}] {i}/{total_files} ({percent_complete:.2f}%)")
+        sys.stdout.write(f"\rPROCESSING: {file_name}\n[{progress_bar}] {i}/{total_files}(%)")
         sys.stdout.flush()
         
         # Simulate processing time
@@ -45,10 +45,10 @@ def create_xiso_from_directories():
         iso_filename = f"{dir_name}.iso"
         
         if os.path.isfile(iso_filename):
-            print(f"SKIPPING: \n>FILE EXISTS> {iso_filename}")
+            print(f"SKIPPING: \nFILE EXISTS> {iso_filename}")
             continue
 
-        print(f"CREATING: \n{dir_name}")
+        print(f"Game Folder: \n{dir_name}")
 
         # Show progress for files in the current directory
         process_files_in_directory(dir_name)
@@ -62,11 +62,11 @@ def create_xiso_from_directories():
         )
         
         if result.returncode != 0:
-            print(f"\nError CREATING xISO for \n{dir_name}\n")
+            print(f"\nError CREATING ISO for \n{dir_name}\n")
             print(f"\nCommand output: \n{result.stdout}\n")
             print(f"\nCommand error: \n{result.stderr}\n")
         else:
-            print(f"SUCCESS: \n{iso_filename}\n")
+            print(f"SUCCESS \n{iso_filename}\n")
 
     print("\nDONE.\n")
 
