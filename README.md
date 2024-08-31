@@ -34,16 +34,17 @@
 **********************************************************************
 * BLAHPR 2024.
 * Contact Email: geebob273@gmail.com - https://github.com/BLAHPR/Xbox360-ISO-Create-Extract
-#
+
 # Acknowledgements - Credits
-XboxDev
-rikyperdana
-raburton
-rapperskull
-iliazeus
-r4dius
-in@fishtank.com
-Redline99
-360mpGui Team
-God2Iso Team
-Iso2God Team
+* XboxDev
+* r4dius
+* in@fishtank.com
+* rapperskull
+* Redline99
+* rikyperdana
+* raburton
+* Elie CHARRA
+* iliazeus
+* 360mpGui Team
+* God2Iso Team
+* Iso2God Team
