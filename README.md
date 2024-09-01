@@ -24,7 +24,7 @@
 * Ensure That the Game Folders Are Placed Next to the x_ISO FOLDER, NOT INSIDE IT. ""See Picture Below""
 ![Capture](https://github.com/user-attachments/assets/d5562ee2-2ff2-4c88-83d9-106d9193ad8d)
 
-* This Utility Will Batch Create ISO's, ISO's Files From These GAME FOLDERS That Contain XEX or XBE.
+* This Utility Will Batch Create ISO Files From These GAME FOLDERS That Contain XEX or XBE.
 
 * The Newly Created ISO Files Will Be Saved Next to the x_ISO Folder. ""See Picture Above""
 * For The Newly Created ISO's To Work With Xbox Image Browser by Redline99 Youll Need to Either Know How to use abgx360 GUI and ImgBurn and XDVDMulleter Plus Others to Correct or Fix
