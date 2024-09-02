@@ -1,0 +1,35 @@
+## What's Changed
+* UPDATED: To v1.2
+* ADDED: Language Support Basic Simple.
+* ADDED: Delete Folders Permanently Button. This PERMANENTLY Deletes Folders that Contain .xex or .xbe Inside Them. This Will Only Delete Folders That Have the .xex or .xbe Files in Them. 
+* REARRANGED: Button Placements.
+* CHANGED: Help\\ReadMe.
+* FIXED: Text and Wording.
+* FIXED: Size of Output Window for Better View of Text.
+* ADDED: ISO to GOD Button for Launching Iso2God.exe for Creating GOD 'Games on Demand' Files from ISOS.
+* ADDED: GOD to ISO Button for Launching God2Iso.exe with Simple info on Fixing ISO Image to Work With Xbox Image Browser by Redline99.
+* ADDED: Xbox Image Browser by Redline99 and Corresponding Button for Launching. Also Added info on ERROR MESSAGE when Trying to Run\\Open Application.
+* ADDED: Grouped Help Tools and Utility's with BLUE MEDIC Color Reminiscent of Help with Friendly Custom Orange for Text.
+* Caution\\Danger Color to Red with Yellow Text.
+* Main Buttons Friendly Custom Blue's and Green's.
+* and Help\\ReadMe Custom Red Reminiscent of MEDIC HELP INFO.
+* Cleaned up Code. 
+
+## DONE: Sunday, August 25, 2024 10:10 PM
+### Contributors - Credits - Thank You's
+Credits to the Original Copyright Owners
+* @BLAHPR 
+* @XboxDev 
+* @rikyperdana  
+* @raburton 
+* @rapperskull  
+* @iliazeus  
+* @r4dius
+* @eliecharra
+* <in@fishtank.com>
+* Redline99
+* 360mpGui Team
+* God2Iso Team
+* Iso2God Team
+
+**Full Changelog**: https://github.com/BLAHPR/Xbox360-ISO-Create-Extract/compare/v1.1...v1.2
