@@ -1,5 +1,6 @@
 ## What's Changed
 * UPDATED: To v1.2
+* Re-named.
 * ADDED: Language Support for GUI and Help / ReadMe Basic Simple.
 * ADDED: Delete Folders Permanently Button. This PERMANENTLY Deletes Folders that Contain .xex or .xbe Inside Them. This Will Only Delete Folders That Have the .xex or .xbe Files in Them. 
 * REARRANGED: Button Placements.
@@ -32,4 +33,4 @@ Credits to the Original Copyright Owners
 * God2Iso Team
 * Iso2God Team
 
-**Full Changelog**: https://github.com/BLAHPR/Xbox360-ISO-Create-Extract/compare/v1.1...v1.2
+**Full Changelog**: https://github.com/BLAHPR/Xbox360-Utility-Create-Extract/compare/v1.1...v1.2
