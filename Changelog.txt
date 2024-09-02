@@ -1,9 +1,9 @@
 ## What's Changed
 * UPDATED: To v1.2
-* ADDED: Language Support Basic Simple.
+* ADDED: Language Support for GUI and Help / ReadMe Basic Simple.
 * ADDED: Delete Folders Permanently Button. This PERMANENTLY Deletes Folders that Contain .xex or .xbe Inside Them. This Will Only Delete Folders That Have the .xex or .xbe Files in Them. 
 * REARRANGED: Button Placements.
-* CHANGED: Help\\ReadMe.
+* CHANGED: Help / ReadMe.
 * FIXED: Text and Wording.
 * FIXED: Size of Output Window for Better View of Text.
 * ADDED: ISO to GOD Button for Launching Iso2God.exe for Creating GOD 'Games on Demand' Files from ISOS.
