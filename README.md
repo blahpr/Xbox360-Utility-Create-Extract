@@ -1,4 +1,6 @@
 # 360 Utility Batch Create Extract  -  FOR WINDOWS
+Latest exe Build (https://github.com/BLAHPR/Xbox360-Utility-Create-Extract/releases/latest)
+
 ## With Language Support Simple and Easy.
 ### Also Has Other Helpful, Useful Programs and Utilitys
 * Batch Extraction and Creation of Xbox 360 and Original Xbox ISO's and FOLDER's With Xex or Xbe, XEX or XBE in It.
