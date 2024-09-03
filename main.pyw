@@ -10,6 +10,7 @@ import pyautogui  # Control mouse and keyboard programmatically
 import time  # Time-related functions
 import shutil  # High-level operations on files and directories (e.g., deletion)
 import json  # For saving and loading language settings
+from translations import get_translations  # Import the function from translations.py
 
 # Function to find resource paths when bundled with PyInstaller
 def resource_path(relative_path):
@@ -39,7 +40,7 @@ class XISOToolApp:
         # Load language from file or use default
         self.language = self.load_language()  # This will load from JSON, or default to English if not found
 
-        self.translations = self.get_translations()  # Dictionary of translations
+        self.translations = get_translations()  # Use the imported function
 
         # Set the icon for the Tkinter window
         icon_path = self.resource_path('images/360.ico')
@@ -117,206 +118,6 @@ class XISOToolApp:
 
         return os.path.join(base_path, relative_path)
 
-    def get_translations(self):
-        """ Dictionary of translations for the GUI. """
-        return { # English
-            "English": {
-                "title": "360 Utility Batch Create Extract v1.2",
-                "author": "BY: BLAHPR 2024",
-                "extract": "Extract Game Folders from ISOS",
-                "create": "Create ISOS from Game Folders",
-                "extract_delete": "Extract and Delete ISO Files  !!! >PERMANENTLY< !!!",
-                "delete": "Delete Game Folders  !!! >PERMANENTLY< !!!",
-                "fix_iso": "Fix ISOS One by One",
-                "iso2god": "ISO to GOD (GAMES ON DEMAND)",
-                "god2iso": "GOD to ISO (GAMES ON DEMAND)",
-                "image_browser": "Xbox Image Browser",
-                "help": ">Help / ReadMe<",
-                'help_text': (
-                    "* 360 Utility Batch Create Extract\n\n"
-                    "* Batch Extraction and Creation of Xbox 360 and Original Xbox ISOs\n\n"
-                    "* This setup allows you to efficiently manage multiple ISOs at once, with\n"
-                    "* all extracted and created files organized next to the x_ISO folder.\n\n"
-                    "**********************************************************************\n"
-                    "1.. Batch Extraction of ISOs:\n\n"
-                    "* Place your ISO files into folder named x_ISO.\n\n"
-                    "* This Utility will batch-extract games from these ISO files.\n\n"
-                    "* The extracted game folders will be created next to the x_ISO folder and\n"
-                    "* contain xex or xbe, not inside ISO folder.\n\n"
-                    "**********************************************************************\n"
-                    "2.. Batch Creation of ISOs From Game Folders:\n\n"
-                    "* Ensure that the game folders are placed next to the x_ISO folder, not\n"
-                    "* inside it.\n\n"
-                    "* This Utility will batch-create ISO files from these game folders that contain\n"
-                    "* xex or xbe.\n\n"
-                    "* The newly created ISO files will be saved next to the x_ISO folder.\n\n"
-                    "**********************************************************************\n"
-                    "* 8/19/2024 8:12 PM\n\n"
-                    "* BLAHPR 2024.\n\n"
-                    "* Contact Email: geebob273@gmail.com\n\n"
-                    "                                                ~~> Credits's <~~\n"
-                    "                                                       **********\n"
-                    "                     <in@fishtank.com> for your cool work and source code.\n"
-                ),
-            }, # Spanish
-            "Español": {
-                "title": "360 Utility Crear y Extraer por Lote v1.2",
-                "author": "POR: BLAHPR 2024",
-                "extract": "Extraer Carpetas de Juegos de ISOS",
-                "create": "Crear ISOS de Carpetas de Juegos",
-                "extract_delete": "Extraer y Eliminar Archivos ISO  !!! >PERMANENTE< !!!",
-                "delete": "Eliminar Carpetas de Juegos  !!! >PERMANENTE< !!!",
-                "fix_iso": "Arreglar ISOS Uno por Uno",
-                "iso2god": "ISO a GOD (JUEGOS BAJO DEMANDA)",
-                "god2iso": "GOD a ISO (JUEGOS BAJO DEMANDA)",
-                "image_browser": "Explorador de Imágenes de Xbox",
-                "help": ">Ayuda / LeerMe<",
-                'help_text': (
-                    "* 360 Utility Crear y Extraer en Lote\n\n"
-                    "* Extracción y Creación en Lote de ISOs de Xbox 360 y Xbox Original\n\n"
-                    "* Esta configuración te permite gestionar múltiples ISOs a la vez, con\n"
-                    "* todos los archivos extraídos y creados organizados junto a la carpeta x_ISO.\n\n"
-                    "**********************************************************************\n"
-                    "1.. Extracción en Lote de ISOs:\n\n"
-                    "* Coloca tus archivos ISO en una carpeta llamada x_ISO.\n\n"
-                    "* Esta utilidad extraerá en lote los juegos de estos archivos ISO.\n\n"
-                    "* Las carpetas de juegos extraídas se crearán junto a la carpeta x_ISO y\n"
-                    "* contendrán xex o xbe, no dentro de la carpeta ISO.\n\n"
-                    "**********************************************************************\n"
-                    "2.. Creación en Lote de ISOs Desde Carpetas de Juegos:\n\n"
-                    "* Asegúrate de que las carpetas de juegos estén colocadas junto a la carpeta x_ISO, no\n"
-                    "* dentro de ella.\n\n"
-                    "* Esta utilidad creará en lote archivos ISO a partir de estas carpetas de juegos que contienen\n"
-                    "* xex o xbe.\n\n"
-                    "* Los archivos ISO recién creados se guardarán junto a la carpeta x_ISO.\n\n"
-                    "**********************************************************************\n"
-                    "* 19/08/2024 8:12 PM\n\n"
-                    "* BLAHPR 2024.\n\n"
-                    "* Correo de contacto: geebob273@gmail.com\n\n"
-                    "                                                ~~> Créditos <~~\n"
-                    "                                                       **********\n"
-                    "                     <in@fishtank.com> por tu genial trabajo y código fuente.\n"
-                ),
-            }, # Russian
-            "Русский": {
-                "title": "360 Utility Пакетное Создание и Извлечение v1.2",
-                "author": "Автор: BLAHPR 2024",
-                "extract": "Извлечь Папки Игр из ISO",
-                "create": "Создать ISO из Папок Игр",
-                "extract_delete": "Извлечь и Удалить ISO Файлы  !!! >ПОСТОЯННО< !!!",
-                "delete": "Удалить Папки Игр  !!! >ПОСТОЯННО< !!!",
-                "fix_iso": "Исправить ISO по Одному",
-                "iso2god": "ISO в GOD (ИГРЫ НА ТРЕБОВАНИЕ)",
-                "god2iso": "GOD в ISO (ИГРЫ НА ТРЕБОВАНИЕ)",
-                "image_browser": "Обозреватель Изображений Xbox",
-                "help": ">Помощь / Прочитать<",
-                'help_text': (
-                    "* 360 Utility Пакетное Создание и Извлечение\n\n"
-                    "* Пакетное Извлечение и Создание ISOs для Xbox 360 и Xbox Original\n\n"
-                    "* Эта настройка позволяет эффективно управлять несколькими ISO одновременно,\n"
-                    "* все извлеченные и созданные файлы организованы рядом с папкой x_ISO.\n\n"
-                    "**********************************************************************\n"
-                    "1.. Пакетное Извлечение ISOs:\n\n"
-                    "* Поместите ваши ISO файлы в папку с именем x_ISO.\n\n"
-                    "* Эта утилита будет пакетно извлекать игры из этих ISO файлов.\n\n"
-                    "* Извлеченные игровые папки будут созданы рядом с папкой x_ISO и\n"
-                    "* содержать xex или xbe, не внутри папки ISO.\n\n"
-                    "**********************************************************************\n"
-                    "2.. Пакетное Создание ISOs из Игровых Папок:\n\n"
-                    "* Убедитесь, что игровые папки находятся рядом с папкой x_ISO, а не\n"
-                    "* внутри нее.\n\n"
-                    "* Эта утилита будет пакетно создавать ISO файлы из этих игровых папок, содержащих\n"
-                    "* xex или xbe.\n\n"
-                    "* Новые ISO файлы будут сохранены рядом с папкой x_ISO.\n\n"
-                    "**********************************************************************\n"
-                    "* 19/08/2024 20:12\n\n"
-                    "* BLAHPR 2024.\n\n"
-                    "* Контактный Email: geebob273@gmail.com\n\n"
-                    "                                                ~~> Кредиты <~~\n"
-                    "                                                       **********\n"
-                    "                     <in@fishtank.com> за вашу отличную работу и исходный код.\n"
-                ),
-            }, # Chinese
-            "中文": {
-                "title": "360 Utility 批量创建提取 v1.2",
-                "author": "作者: BLAHPR 2024",
-                "extract": "从ISO中提取游戏文件夹",
-                "create": "从游戏文件夹创建ISO",
-                "extract_delete": "提取并删除ISO文件  !!! >永久< !!!",
-                "delete": "删除游戏文件夹  !!! >永久< !!!",
-                "fix_iso": "逐个修复ISO",
-                "iso2god": "ISO 转 GOD（按需游戏）",
-                "god2iso": "GOD 转 ISO（按需游戏）",
-                "image_browser": "Xbox图像浏览器",
-                "help": ">帮助 / 阅读<",
-                'help_text': (
-                    "* 360 Utility 批量创建提取\n\n"
-                    "* Xbox 360 和 Xbox 原版 ISOs 的批量提取和创建\n\n"
-                    "* 此设置允许您一次高效管理多个 ISO，所有提取和创建的文件\n"
-                    "* 将与 x_ISO 文件夹一起组织。\n\n"
-                    "**********************************************************************\n"
-                    "1.. 批量提取 ISOs:\n\n"
-                    "* 将您的 ISO 文件放入名为 x_ISO 的文件夹中。\n\n"
-                    "* 此工具将批量提取这些 ISO 文件中的游戏。\n\n"
-                    "* 提取的游戏文件夹将创建在 x_ISO 文件夹旁边，\n"
-                    "* 包含 xex 或 xbe，不在 ISO 文件夹内。\n\n"
-                    "**********************************************************************\n"
-                    "2.. 从游戏文件夹批量创建 ISOs:\n\n"
-                    "* 确保游戏文件夹位于 x_ISO 文件夹旁边，而不是\n"
-                    "* 里面。\n\n"
-                    "* 此工具将从包含 xex 或 xbe 的这些游戏文件夹批量创建 ISO 文件。\n\n"
-                    "* 新创建的 ISO 文件将保存到 x_ISO 文件夹旁边。\n\n"
-                    "**********************************************************************\n"
-                    "* 2024年8月19日 20:12\n\n"
-                    "* BLAHPR 2024.\n\n"
-                    "* 联系邮件: geebob273@gmail.com\n\n"
-                    "                                                ~~> 版权声明 <~~\n"
-                    "                                                       **********\n"
-                    "                     <in@fishtank.com> 感谢您的出色工作和源代码。\n"
-                ),
-            }, # Japanese
-            "日本語": {
-                "title": "360 Utility バッチ作成抽出 v1.2",
-                "author": "BY: BLAHPR 2024",
-                "extract": "ISOからゲームフォルダを抽出",
-                "create": "ゲームフォルダからISOを作成",
-                "extract_delete": "ISOファイルを抽出して削除 !!! >永久< !!!",
-                "delete": "ゲームフォルダを削除 !!! >永久< !!!",
-                "fix_iso": "ISOを一つずつ修正",
-                "iso2god": "ISOをGODに変換 (オンデマンドゲーム)",
-                "god2iso": "GODをISOに変換 (オンデマンドゲーム)",
-                "image_browser": "Xboxイメージブラウザ",
-                "help": ">ヘルプ / 読み取り<",
-                'help_text': (
-                    "* 360 Utility バッチ作成抽出\n\n"
-                    "* Xbox 360 およびオリジナル Xbox ISOs のバッチ抽出および作成\n\n"
-                    "* この設定により、一度に複数の ISO を効率的に管理でき、\n"
-                    "* すべての抽出および作成されたファイルが x_ISO フォルダの隣に整理されます。\n\n"
-                    "**********************************************************************\n"
-                    "1.. ISO のバッチ抽出:\n\n"
-                    "* ISO ファイルを x_ISO という名前のフォルダに置きます。\n\n"
-                    "* このユーティリティは、これらの ISO ファイルからゲームをバッチ抽出します。\n\n"
-                    "* 抽出されたゲームフォルダは x_ISO フォルダの隣に作成され、\n"
-                    "* ISO フォルダ内ではなく xex または xbe を含みます。\n\n"
-                    "**********************************************************************\n"
-                    "2.. ゲームフォルダからのバッチ ISO 作成:\n\n"
-                    "* ゲームフォルダが x_ISO フォルダの隣に置かれていることを確認します。\n"
-                    "* 内部ではなく。\n\n"
-                    "* このユーティリティは、これらのゲームフォルダから ISO ファイルをバッチ作成します。\n"
-                    "* xex または xbe を含む。\n\n"
-                    "* 新しく作成された ISO ファイルは x_ISO フォルダの隣に保存されます。\n\n"
-                    "**********************************************************************\n"
-                    "* 2024年8月19日 20:12\n\n"
-                    "* BLAHPR 2024.\n\n"
-                    "* 連絡先メール: geebob273@gmail.com\n\n"
-                    "                                                ~~> クレジット <~~\n"
-                    "                                                       **********\n"
-                    "                     <in@fishtank.com> 素晴らしい仕事とソースコードに感謝します。\n"
-                ),
-            },
-            # Add additional languages as needed
-        }
-
     def set_language(self, lang):
         # Update GUI text based on the selected language
         self.language = lang
@@ -352,6 +153,13 @@ class XISOToolApp:
         if hasattr(self, 'language_menu'):
             self.language_menu.entryconfig("Language", label=f"Language: {self.language}")
 
+    def update_translated_status(self, message_key, *args):
+        """ Update the status text window with a translated message. """
+        tr = self.translations.get(self.language, self.translations["English"])
+        message_template = tr.get(message_key, message_key)
+        message = message_template.format(*args)
+        self.update_status(message)
+
     def save_language(self):
         """ Save the selected language to a file in the x_tool folder. """
         os.makedirs(self.config_folder, exist_ok=True)
@@ -374,7 +182,8 @@ class XISOToolApp:
         # Language menu
         language_menu = Menu(menubar, tearoff=0)
         menubar.add_cascade(label="Language", menu=language_menu)
-        languages = ["English", "Español", "Русский", "中文", "日本語"]
+        languages = ["العربية (Arabic)", "中文 (Chinese)", "Nederlands (Dutch)", "English", "Français (French)", "Deutsch (German)", "हिन्दी (Hindi)", "Italiano (Italian)", "日本語 (Japanese)", "한국어 (Korean)", "Norsk (Norwegian)", "فارسی (Persian)", "Polski (Polish)", "ਪੰਜਾਬੀ (Punjabi)", "Русский (Russian)", "Español (Spanish)", "Svenska (Swedish)", "Українська (Ukrainian)"]
+
         for lang in languages:
             language_menu.add_command(label=lang, command=lambda l=lang: self.set_language(l))
 
