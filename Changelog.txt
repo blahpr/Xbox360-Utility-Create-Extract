@@ -27,10 +27,13 @@ Credits to the Original Copyright Owners
 * @iliazeus  
 * @r4dius
 * @eliecharra
+* @markus-oberhumer
+* @upx
 * <in@fishtank.com>
 * Redline99
 * 360mpGui Team
 * God2Iso Team
 * Iso2God Team
+* UPX Team
 
 **Full Changelog**: https://github.com/BLAHPR/Xbox360-Utility-Create-Extract/compare/v1.1...v1.2
