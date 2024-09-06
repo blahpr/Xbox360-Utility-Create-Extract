@@ -41,16 +41,18 @@ Latest exe Build (https://github.com/BLAHPR/Xbox360-Utility-Create-Extract/relea
 * Contact Email: geebob273@gmail.com - (https://github.com/BLAHPR/Xbox360-Utility-Create-Extract)
 
 # Acknowledgements - Credits
-* XboxDev
+* BLAHPR 
+* XboxDev 
+* rikyperdana  
+* raburton 
+* rapperskull  
+* iliazeus  
 * r4dius
-* in@fishtank.com
-* rapperskull
+* eliecharra
+* markus-oberhumer
+* upx Team
+* <in@fishtank.com>
 * Redline99
-* rikyperdana
-* raburton
-* Elie CHARRA
-* iliazeus
 * 360mpGui Team
 * God2Iso Team
 * Iso2God Team
-* UPX Team
