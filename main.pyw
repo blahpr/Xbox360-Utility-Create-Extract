@@ -42,6 +42,8 @@ class XISOToolApp:
 
         self.translations = get_translations()  # Use the imported function
 
+        self.update_language_menu_label()  # Ensure the menu label is correct initially
+
         # Set the icon for the Tkinter window
         icon_path = self.resource_path('images/360.ico')
         self.root.iconbitmap(icon_path)
@@ -61,6 +63,116 @@ class XISOToolApp:
         if "language" in config:
             self.language = config["language"]
         self.update_texts()
+
+    def set_language(self, lang):
+        # Update the selected language and save it
+        self.language = lang
+        self.save_language()  # Save the selected language
+        self.update_texts()  # Update all text in the GUI
+
+    def update_texts(self):
+        # Get the translations for the selected language, or fall back to English if not available
+        tr = self.translations.get(self.language, self.translations["English"])
+
+        # Update window title
+        self.root.title(tr.get('title', "360 Utility Batch Create Extract v1.2"))
+
+        # Update labels and buttons
+        self.title_label.config(text=tr.get("title", "360 Utility Batch Create Extract v1.2"))
+        self.author_label.config(text=tr.get("author", "BY: BLAHPR 2024"))
+        self.extract_btn.config(text=tr.get("extract", "Extract Game Folders from ISOS"))
+        self.create_btn.config(text=tr.get("create", "Create ISOS from Game Folders"))
+        self.extract_delete_btn.config(text=tr.get("extract_delete", "Extract and Delete ISO Files  !!! >PERMANENTLY< !!!"))
+        self.delete_source_folders_btn.config(text=tr.get("delete", "Delete Game Folders  !!! >PERMANENTLY< !!!"))
+        self.fix_iso_btn.config(text=tr.get("fix_iso", "Fix ISOS One by One"))
+        self.isotogod_btn.config(text=tr.get("iso2god", "ISO to GOD (GAMES ON DEMAND)"))
+        self.godtoiso_btn.config(text=tr.get("god2iso", "GOD to ISO (GAMES ON DEMAND)"))
+        self.image_browser_btn.config(text=tr.get("image_browser", "Xbox Image Browser"))
+        self.help_btn.config(text=tr.get('help', ">Help / ReadMe<"))
+
+        # Update the language menu label
+        self.update_language_menu_label()
+
+    def update_language_menu_label(self):
+        # Update the language menu label in the menubar
+        if hasattr(self, 'language_menu'):
+            # Update language menu label
+            self.language_menu.entryconfig(0, label=f"{self.language}")
+
+    def create_widgets(self):
+        # Create menu bar
+        menubar = Menu(self.root)
+        self.root.config(menu=menubar)
+
+        # Language menu
+        self.language_menu = Menu(menubar, tearoff=0)
+        menubar.add_cascade(label=f"{self.language}", menu=self.language_menu)
+        languages = ["العربية (Arabic)", "中文 (Chinese)", "Nederlands (Dutch)", "English", "Français (French)",
+                     "Deutsch (German)", "हिन्दी (Hindi)", "Italiano (Italian)", "日本語 (Japanese)", "한국어 (Korean)",
+                     "Norsk (Norwegian)", "فارسی (Persian)", "Polski (Polish)", "ਪੰਜਾਬੀ (Punjabi)", "Русский (Russian)",
+                     "Español (Spanish)", "Svenska (Swedish)", "Українська (Ukrainian)"]
+
+        for lang in languages:
+            self.language_menu.add_command(label=lang, command=lambda l=lang: self.set_language(l))
+
+        # Title and author labels at the top
+        self.title_label = tk.Label(self.root, text="360 Utility Batch Create Extract v1.2", font=("Helvetica", 16), fg="gold", bg="brown")
+        self.title_label.pack(pady=10)
+
+        self.author_label = tk.Label(self.root, text="BY: BLAHPR 2024", font=("Helvetica", 12), fg="gold", bg="brown")
+        self.author_label.pack(pady=1)
+
+        # Buttons arranged in the middle
+        button_frame = tk.Frame(self.root, bg="black")
+        button_frame.pack(pady=10, fill=tk.X)
+
+        # Define a font variable for bold text
+        bold_font = ("Helvetica", 12, "bold")
+
+        # Create buttons with updated colors and commands
+        self.extract_btn = tk.Button(button_frame, text="Extract Game Folders from ISOS", command=self.extract_xiso, bg="lightblue", fg="blue", font=bold_font)
+        self.extract_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        self.create_btn = tk.Button(button_frame, text="Create ISOS from Game Folders", command=self.create_xiso, bg="lightgreen", fg="green", font=bold_font)
+        self.create_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        self.extract_delete_btn = tk.Button(button_frame, text="Extract and Delete ISO Files  !!! >PERMANENTLY< !!!", command=self.extract_delete_xiso, bg="#FF0000", fg="yellow", font=bold_font)
+        self.extract_delete_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        self.delete_source_folders_btn = tk.Button(button_frame, text="Delete Game Folders  !!! >PERMANENTLY< !!!", command=self.delete_source_folders, bg="#FF0000", fg="yellow", font=bold_font)
+        self.delete_source_folders_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        # Buttons to run external programs
+        self.fix_iso_btn = tk.Button(button_frame, text="Fix ISOS One by One", command=self.run_external_program_1, bg="#00569D", fg="darkorange", font=bold_font)
+        self.fix_iso_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        self.isotogod_btn = tk.Button(button_frame, text="ISO to GOD (GAMES ON DEMAND)", command=self.run_external_program_2, bg="#00569D", fg="darkorange", font=bold_font)
+        self.isotogod_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        self.godtoiso_btn = tk.Button(button_frame, text="GOD to ISO (GAMES ON DEMAND)", command=self.run_external_program_3, bg="#00569D", fg="darkorange", font=bold_font)
+        self.godtoiso_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        self.image_browser_btn = tk.Button(button_frame, text="Xbox Image Browser", command=self.run_external_program_4, bg="#00569D", fg="darkorange", font=bold_font)
+        self.image_browser_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        self.help_btn = tk.Button(button_frame, text=">Help / ReadMe<", command=self.show_help, bg="crimson", fg="white", font=bold_font)
+        self.help_btn.pack(pady=5, fill=tk.X, padx=20)
+
+        # Status window at the bottom
+        status_frame = tk.Frame(self.root, bg="black")
+        status_frame.pack(expand=True, fill=tk.BOTH, pady=10, padx=20)
+
+        self.status_text = tk.Text(status_frame, bg="black", fg="white", wrap=tk.WORD)
+        self.status_text.pack(expand=True, fill=tk.BOTH)
+
+        scrollbar = tk.Scrollbar(status_frame, command=self.status_text.yview)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        self.status_text.config(yscrollcommand=scrollbar.set)
+
+        # Help content display area
+        self.help_text_area = tk.Text(self.root, bg="lightgrey", fg="black", wrap=tk.WORD, height=15)
+        self.help_text_area.pack(pady=10, padx=10, fill=tk.BOTH)
+        self.help_text_area.config(state=tk.DISABLED)
 
     def initialize_ui(self):
         # Initialize UI elements and set default language
@@ -119,23 +231,18 @@ class XISOToolApp:
         return os.path.join(base_path, relative_path)
 
     def set_language(self, lang):
-        # Update GUI text based on the selected language
+        """ Update the selected language and refresh the UI. """
         self.language = lang
         self.save_language()  # Save the selected language
         self.update_texts()  # Update all text in the GUI
 
-        # Update the language menu label
-        if hasattr(self, 'language_menu'):
-            self.language_menu.entryconfig("Language", label=f"Language: {self.language}")
-
     def update_texts(self):
-        # Update all text elements in the GUI based on the current language
-        # Get the translations for the selected language, or fall back to English if not available
+        """ Update all text elements in the GUI based on the current language. """
         tr = self.translations.get(self.language, self.translations["English"])
-        
+
         # Update window title
         self.root.title(tr.get('title', "360 Utility Batch Create Extract v1.2"))
-        
+
         # Update labels and buttons
         self.title_label.config(text=tr.get("title", "360 Utility Batch Create Extract v1.2"))
         self.author_label.config(text=tr.get("author", "BY: BLAHPR 2024"))
@@ -149,9 +256,17 @@ class XISOToolApp:
         self.image_browser_btn.config(text=tr.get("image_browser", "Xbox Image Browser"))
         self.help_btn.config(text=tr.get('help', ">Help / ReadMe<"))
 
-        # Update language menu label
+        # Update the language menu label
+        self.update_language_menu_label()
+
+    def update_language_menu_label(self):
+        """ Update the language menu label to reflect the selected language. """
         if hasattr(self, 'language_menu'):
-            self.language_menu.entryconfig("Language", label=f"Language: {self.language}")
+            # Update language menu label
+            self.language_menu.entryconfig(0, label=f"{self.language}")
+        if hasattr(self, 'menubar'):
+            # Update menubar label
+            self.menubar.entryconfig(1, label=f"{self.language}")
 
     def update_translated_status(self, message_key, *args):
         """ Update the status text window with a translated message. """
@@ -178,11 +293,15 @@ class XISOToolApp:
         # Create menu bar
         menubar = Menu(self.root)
         self.root.config(menu=menubar)
+        self.menubar = menubar
 
         # Language menu
         language_menu = Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="Language", menu=language_menu)
-        languages = ["العربية (Arabic)", "中文 (Chinese)", "Nederlands (Dutch)", "English", "Français (French)", "Deutsch (German)", "हिन्दी (Hindi)", "Italiano (Italian)", "日本語 (Japanese)", "한국어 (Korean)", "Norsk (Norwegian)", "فارسی (Persian)", "Polski (Polish)", "ਪੰਜਾਬੀ (Punjabi)", "Русский (Russian)", "Español (Spanish)", "Svenska (Swedish)", "Українська (Ukrainian)"]
+        menubar.add_cascade(label=f"{self.language}", menu=language_menu)
+        languages = ["العربية (Arabic)", "中文 (Chinese)", "Nederlands (Dutch)", "English", "Français (French)",
+                     "Deutsch (German)", "हिन्दी (Hindi)", "Italiano (Italian)", "日本語 (Japanese)", "한국어 (Korean)",
+                     "Norsk (Norwegian)", "فارسی (Persian)", "Polski (Polish)", "ਪੰਜਾਬੀ (Punjabi)", "Русский (Russian)",
+                     "Español (Spanish)", "Svenska (Swedish)", "Українська (Ukrainian)"]
 
         for lang in languages:
             language_menu.add_command(label=lang, command=lambda l=lang: self.set_language(l))
@@ -201,6 +320,7 @@ class XISOToolApp:
         # Define a font variable for bold text
         bold_font = ("Helvetica", 12, "bold")
 
+        # Create buttons with updated colors and commands
         self.extract_btn = tk.Button(button_frame, text="Extract Game Folders from ISOS", command=self.extract_xiso, bg="lightblue", fg="blue", font=bold_font)
         self.extract_btn.pack(pady=5, fill=tk.X, padx=20)
 
@@ -210,11 +330,10 @@ class XISOToolApp:
         self.extract_delete_btn = tk.Button(button_frame, text="Extract and Delete ISO Files  !!! >PERMANENTLY< !!!", command=self.extract_delete_xiso, bg="#FF0000", fg="yellow", font=bold_font)
         self.extract_delete_btn.pack(pady=5, fill=tk.X, padx=20)
 
-        # New button to delete source folders
         self.delete_source_folders_btn = tk.Button(button_frame, text="Delete Game Folders  !!! >PERMANENTLY< !!!", command=self.delete_source_folders, bg="#FF0000", fg="yellow", font=bold_font)
         self.delete_source_folders_btn.pack(pady=5, fill=tk.X, padx=20)
 
-        # New buttons to run external programs
+        # Buttons to run external programs
         self.fix_iso_btn = tk.Button(button_frame, text="Fix ISOS One by One", command=self.run_external_program_1, bg="#00569D", fg="darkorange", font=bold_font)
         self.fix_iso_btn.pack(pady=5, fill=tk.X, padx=20)
 
@@ -241,7 +360,7 @@ class XISOToolApp:
         scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
         self.status_text.config(yscrollcommand=scrollbar.set)
 
-        # Add help content display area
+        # Help content display area
         self.help_text_area = tk.Text(self.root, bg="lightgrey", fg="black", wrap=tk.WORD, height=15)
         self.help_text_area.pack(pady=10, padx=10, fill=tk.BOTH)
         self.help_text_area.config(state=tk.DISABLED)
