@@ -123,8 +123,7 @@ class XISOToolApp:
         self.update_texts()  # Update all text in the GUI
 
         # Update the language menu label
-        if hasattr(self, 'language_menu'):
-            self.language_menu.entryconfig(f"{self.language}")
+        self.update_language_menu_label()
 
     def update_texts(self):
         # Update all text elements in the GUI based on the current language
@@ -141,44 +140,20 @@ class XISOToolApp:
         self.create_btn.config(text=tr.get("create", "Create ISOS from Game Folders"))
         self.extract_delete_btn.config(text=tr.get("extract_delete", "Extract and Delete ISO Files  !!! >PERMANENTLY< !!!"))
         self.delete_source_folders_btn.config(text=tr.get("delete", "Delete Game Folders  !!! >PERMANENTLY< !!!"))
-        self.fix_iso_btn.config(text=tr.get("fix_iso", "Fix ISOS One by One"))
+        self.fix_iso_btn.config(text=tr.get("fix_iso", "360mpGui v1.5.0.0 (Fix ISOS One by One)"))
         self.isotogod_btn.config(text=tr.get("iso2god", "ISO to GOD (GAMES ON DEMAND)"))
         self.godtoiso_btn.config(text=tr.get("god2iso", "GOD to ISO (GAMES ON DEMAND)"))
         self.image_browser_btn.config(text=tr.get("image_browser", "Xbox Image Browser"))
         self.help_btn.config(text=tr.get('help', ">Help / ReadMe<"))
 
         # Update language menu label
-        if hasattr(self, 'language_menu'):
-            self.language_menu.entryconfig(f"{self.language}")
-            self.update_language_menu_label()
+        self.update_language_menu_label()
 
     def update_language_menu_label(self):
         # Update the language menu label in the menubar
         if hasattr(self, 'language_menu'):
-            # Update language menu label
-            self.language_menu.entryconfig(0, label=f"{self.language}")
+            self.menubar.entryconfig(1, label=f"{self.language}")  # Update language menu label
     
-    def update_translated_status(self, message_key, *args):
-        """ Update the status text window with a translated message. """
-        tr = self.translations.get(self.language, self.translations["English"])
-        message_template = tr.get(message_key, message_key)
-        message = message_template.format(*args)
-        self.update_status(message)
-
-    def save_language(self):
-        """ Save the selected language to a file in the x_tool folder. """
-        os.makedirs(self.config_folder, exist_ok=True)
-        with open(self.language_settings_path, "w") as file:
-            json.dump({"language": self.language}, file)
-
-    def load_language(self):
-        """ Load the selected language from a file in the x_tool folder. """
-        if os.path.exists(self.language_settings_path):
-            with open(self.language_settings_path, "r") as file:
-                data = json.load(file)
-                return data.get("language", "English")
-        return "English"
-
     def create_widgets(self):
         # Create menu bar
         menubar = Menu(self.root)
@@ -187,7 +162,8 @@ class XISOToolApp:
 
         # Language menu
         language_menu = Menu(menubar, tearoff=0)
-        menubar.add_cascade(label="Language", menu=language_menu)
+        menubar.add_cascade(label=f"{self.language}", menu=language_menu)
+        self.language_menu = language_menu
         languages = ["العربية (Arabic)", "中文 (Chinese)", "Nederlands (Dutch)", "English", "Français (French)", "Deutsch (German)", "हिन्दी (Hindi)", "Italiano (Italian)", "日本語 (Japanese)", "한국어 (Korean)", "Norsk (Norwegian)", "فارسی (Persian)", "Polski (Polish)", "ਪੰਜਾਬੀ (Punjabi)", "Русский (Russian)", "Español (Spanish)", "Svenska (Swedish)", "Українська (Ukrainian)"]
 
         for lang in languages:
@@ -221,7 +197,7 @@ class XISOToolApp:
         self.delete_source_folders_btn.pack(pady=5, fill=tk.X, padx=20)
 
         # New buttons to run external programs
-        self.fix_iso_btn = tk.Button(button_frame, text="Fix ISOS One by One", command=self.run_external_program_1, bg="#00569D", fg="darkorange", font=bold_font)
+        self.fix_iso_btn = tk.Button(button_frame, text="360mpGui v1.5.0.0 (Fix ISOS One by One)", command=self.run_external_program_1, bg="#00569D", fg="darkorange", font=bold_font)
         self.fix_iso_btn.pack(pady=5, fill=tk.X, padx=20)
 
         self.isotogod_btn = tk.Button(button_frame, text="ISO to GOD (GAMES ON DEMAND)", command=self.run_external_program_2, bg="#00569D", fg="darkorange", font=bold_font)
@@ -412,7 +388,7 @@ class XISOToolApp:
         subprocess.Popen([r'x_tool\God2Iso 1.0.5\God2Iso.exe'], creationflags=subprocess.CREATE_NO_WINDOW)
 
         # Update status message with the correct information
-        self.update_status("\nCreate ISOS from GOD 'Games on Demand' for Xbox360.\nUse Fix ISOS One by One To Fix ISOS to Work with Xbox Image Browser.\n\nDONT FORGET:\nAfter or Before Adding ISOS Check Fix''CreateIsoGood''broken header if Needed.")
+        self.update_status("\nCreate ISOS from GOD 'Games on Demand' for Xbox360.\nUse 360mpGui v1.5.0.0 (Fix ISOS One by One) To Fix ISOS to Work with Xbox Image Browser.\n\nDONT FORGET:\nAfter or Before Adding ISOS Check Fix''CreateIsoGood''broken header if Needed.")
 
     def run_external_program_4(self):
         self.clear_status()

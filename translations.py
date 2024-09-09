@@ -9,7 +9,7 @@ def get_translations():
             "create": "Create ISOS from Game Folders",
             "extract_delete": "Extract and Delete ISO Files  !!! >PERMANENTLY< !!!",
             "delete": "Delete Game Folders  !!! >PERMANENTLY< !!!",
-            "fix_iso": "Fix ISOS One by One",
+            "fix_iso": "360mpGui v1.5.0.0 (Fix ISOS One by One)",
             "iso2god": "ISO to GOD (GAMES ON DEMAND)",
             "god2iso": "GOD to ISO (GAMES ON DEMAND)",
             "image_browser": "Xbox Image Browser",
