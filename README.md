@@ -1,4 +1,4 @@
-# 360 Utility Batch Create Extract  - Free FOR WINDOWS
+# 360 Utility Batch Create Extract  - FOR WINDOWS
 ### Anyone Can Make Changes As They See Fit. Like Change Stuff, Add Stuff, Dislike Stuff You Can Please Feel Free.
 * Latest exe Build (https://github.com/BLAHPR/Xbox360-Utility-Create-Extract/releases/latest)
 * Using UPX The Ultimate Packer for eXecutables (https://github.com/upx/upx)
