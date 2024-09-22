@@ -1,7 +1,5 @@
 # 360 Utility Batch Create Extract  - FOR WINDOWS
-### Anyone Can Make Changes As They See Fit. Like Change Stuff, Add Stuff, Dislike Stuff You Can Please Feel Free.
 * Latest exe Build (https://github.com/BLAHPR/Xbox360-Utility-Create-Extract/releases/latest)
-* Using UPX The Ultimate Packer for eXecutables (https://github.com/upx/upx)
 
 ## With Language Support Simple and Easy.
 ### Also Has Other Helpful, Useful Programs and Utilitys
@@ -57,3 +55,6 @@
 * 360mpGui Team
 * God2Iso Team
 * Iso2God Team
+
+### Anyone Can Make Changes As They See Fit. Like Change Stuff, Add Stuff, Dislike Stuff You Can Please Feel Free.
+* Using UPX The Ultimate Packer for eXecutables (https://github.com/upx/upx)
